@@ -1,0 +1,9 @@
+# Placeholder for: docs/screenshots/incident-replay.png
+
+This file should be replaced with a high-resolution screenshot of the **Incident Replay Mode** feature from the running application.
+
+**Ideal Screenshot:**
+* Shows the map view.
+* Clearly shows the timeline/scrubber UI at the bottom of the screen.
+* Highlights an event (like a "Critical" incident) on the map.
+* The "Replay Controls" (play, pause, speed) are visible.
