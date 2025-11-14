@@ -1,0 +1,27 @@
+{
+  "name": "civicpulse-ai-monorepo",
+  "private": true,
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "db:push": "pnpm --filter backend exec prisma db push",
+    "db:seed": "pnpm --filter backend exec prisma db seed",
+    "docker:prod": "docker-compose -f devops/docker-compose.yml up --build",
+    "docker:db": "docker-compose -f devops/docker-compose.yml up db"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.20",
+    "prettier": "^3.2.5",
+    "turbo": "^1.12.5",
+    "typescript": "^5.3.3",
+    "axios": "^1.6.8",
+    "dotenv": "^16.4.5",
+    "tsx": "^4.7.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "packageManager": "pnpm@8.15.5"
+}
