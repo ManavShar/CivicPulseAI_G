@@ -1,0 +1,78 @@
+graph TD
+    subgraph "User (City Operator)"
+        A[Browser - React Frontend]
+    end
+
+    subgraph "CivicPulse AI Platform (Docker)"
+        subgraph "Gateway"
+            B[Nginx Reverse Proxy]
+        end
+
+        subgraph "Frontend Service (Vite)"
+            C[React App Container]
+        end
+
+        subgraph "Backend Service (Node.js + Fastify)"
+            D[Fastify API Server]
+            E[WebSocket Server]
+            F[Prisma ORM]
+            G[Incident Engine]
+            H[Prediction Service]
+        end
+
+        subgraph "Agent Service (Python)"
+            I[Python API (FastAPI)]
+            J[Planner Agent]
+            K[Dispatcher Agent]
+            L[Analyst Agent]
+            M[LLM Client]
+        end
+
+        subgraph "Simulation & ML"
+            N[Sensor Script (TS)]
+            O[ML Model (Python/Pickle)]
+        end
+
+        subgraph "Data Stores"
+            P[PostgreSQL Database]
+            Q[Redis Cache (Optional)]
+        end
+    end
+
+    subgraph "External Services"
+        R[Third-Party LLM (e.g. OpenAI)]
+        S[Mapbox API]
+    end
+
+    %% --- Connections ---
+    A -- HTTPS Requests --> B
+    A -- WebSocket (WSS) --> B
+
+    B -- / --> C
+    B -- /api --> D
+    B -- /ws --> E
+    B -- /agents --> I
+
+    D -- Reads/Writes --> F
+    F -- SQL --> P
+    D -- Publishes --> E
+    D -- Calls for Analysis --> I
+    G -- Uses --> H
+    H -- Calls --> O
+    
+    I -- Uses --> M
+    M -- API Call --> R
+
+    N -- Ingests Data --> D
+
+    A -- Calls for Tiles --> S
+
+    %% Styling
+    classDef service fill:#E8F5E9,stroke:#4CAF50,stroke-width:2px;
+    class C,D,E,I,N service;
+
+    classDef agent fill:#FFF3E0,stroke:#FF9800,stroke-width:2px;
+    class J,K,L agent;
+
+    classDef db fill:#E3F2FD,stroke:#2196F3,stroke-width:2px;
+    class P,Q db;
